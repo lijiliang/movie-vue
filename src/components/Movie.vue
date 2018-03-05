@@ -1,5 +1,5 @@
 <template>
-  <layout :has_share="has_share" title="综合">
+  <layout :has_share="has_share" title="电影">
     <div class="page_wrap">
       <div class="page_bd">
         sadf

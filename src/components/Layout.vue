@@ -47,9 +47,11 @@
   </div>
 </template>
 <script>
+import bg from '../assets/images/bg.png'
 export default {
   data () {
     return {
+      bg: bg,
       active_nav: '/',
       bottom_nav: [{
         title: '首页',
@@ -95,6 +97,12 @@ export default {
       default: true
     }
   },
+  created () {
+    // this.setActiveNav()
+  },
+  activated () {
+    this.setActiveNav()
+  },
   methods: {
     openMenu () {
       this.open = !this.open
@@ -113,6 +121,11 @@ export default {
     handleChange (val) {
       this.active_nav = val
       this.$router.push(val)
+    },
+    // 设置当前导航高亮
+    setActiveNav () {
+      let path = this.$route.path
+      this.active_nav = path
     },
     search () {
       this.$router.push('/all/search')

@@ -4,6 +4,7 @@
  * http://blog.csdn.net/crper/article/details/77619067  给axios做个挺靠谱的封装(报错,鉴权,跳转,拦截,提示)
  * https://juejin.im/post/591aa14f570c35006961acac#heading-12
  * https://github.com/PanJiaChen/vue-element-admin/blob/master/src/utils/request.js
+ * https://mp.weixin.qq.com/s/KabBPItayxBEv56_g9y6KQ
  */
 
 /*
@@ -23,6 +24,7 @@
 */
 import axios from 'axios'
 import qs from 'qs'
+import { Indicator, Toast } from 'mint-ui'
 import { API_ROOT } from './config'
 
 const fetch = axios.create({
@@ -34,11 +36,11 @@ const fetch = axios.create({
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
   }
 })
-
 // 请求拦截器
 fetch.interceptors.request.use(config => {
   // 在发送请求之前做某些事
   // loading效果开始
+  Indicator.open('Loading...')
 
   if (config.method === 'post' || config.method === 'put' || config.method === 'delete') {
     // 序列化
@@ -57,6 +59,7 @@ fetch.interceptors.request.use(config => {
 // 响应拦截器
 fetch.interceptors.response.use(res => {
   // 关闭loading效果
+  Indicator.close()
 
   // 对响应回来的数据做些事
   /*
@@ -70,10 +73,58 @@ fetch.interceptors.response.use(res => {
 }, err => {
   // 这里是处理需要重新登录, 404, 500相关处理
   console.log(err.response)
+  Indicator.close()
+  Toast('获取数据失败...')
   return Promise.resolve(err)
 })
 
-export default fetch
+let base = ''
+// get请求
+export const getFetch = (url, params) => {
+  return fetch({
+    method: 'get',
+    url: `${base}${url}`,
+    params: params
+  })
+}
+
+// post请求
+export const postFetch = (url, params) => {
+  return fetch({
+    method: 'post',
+    url: `${base}${url}`,
+    data: params
+  })
+}
+
+// put请求
+export const putFetch = (url, params) => {
+  return fetch({
+    method: 'put',
+    url: `${base}${url}`,
+    data: params
+  })
+}
+
+export const deleteFetch = (url) => {
+  return fetch({
+    method: 'delete',
+    url: `${base}${url}`
+  })
+}
+// 上传操作
+export const uploadFileFetch = (url, params) => {
+  return axios({
+    method: 'post',
+    url: `${base}${url}`,
+    data: params,
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+// export default fetch
 
 /*
 axios 的一些配置

@@ -1,25 +1,9 @@
-import fetch from '@/base/fetch'
+import { getFetch, postFetch } from '@/base/fetch'
 
 export function getIndex (query) {
-  return fetch({
-    url: 'index',
-    method: 'get',
-    params: query
-  })
-}
-
-export function fetchPv (pv) {
-  return fetch({
-    url: '/article/pv',
-    method: 'get',
-    params: { pv }
-  })
+  return getFetch('index', query)
 }
 
 export function createArticle (data) {
-  return fetch({
-    url: '/article/create',
-    method: 'post',
-    data
-  })
+  return postFetch('/article/create', data)
 }

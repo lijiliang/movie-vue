@@ -10,7 +10,7 @@
 </template>
 <script>
 import Layout from '@/components/Layout'
-import { getIndex, createArticle } from '@/api'
+import { getIndex } from '@/api'
 export default {
   data () {
     return {
@@ -26,15 +26,15 @@ export default {
         console.log(err)
       }
 
-      try {
-        const data = await createArticle({page: 1, index: 'test'})
-        if (data.response.status === 404) {
-          throw new Error(data)
-        }
-      } catch (error) {
-        console.log(error)
-        alert(error.message)
-      }
+      // try {
+      //   const data = await createArticle({page: 1, index: 'test'})
+      //   if (data.response.status === 404) {
+      //     throw new Error(data)
+      //   }
+      // } catch (error) {
+      //   console.log(error)
+      //   alert(error.message)
+      // }
     }
   },
   components: {

@@ -35,7 +35,7 @@ export default {
       loading: 'init',
       movies: [], // 电影列表
       tvs: [],
-      refreshing: false,
+      refreshing: false, // 正在刷新数据
       trigger: null
     }
   },
@@ -49,7 +49,12 @@ export default {
     async getIndex () {
       let params = {}
       params.page = this.page || 1
+      this.loading = 'loading'
+      this.refreshing = true
+
       const res = await this.$store.dispatch('getAllList', params)
+      this.loading = 'loaded'
+      this.refreshing = false
       const {data} = res
       if (params.page > 1) {
         this.movies.push(...data.movies)

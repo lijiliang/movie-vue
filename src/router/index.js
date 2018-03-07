@@ -5,6 +5,7 @@ import Movie from '@/components/Movie'
 import Tv from '@/components/Tv'
 import User from '@/components/User'
 import Search from '@/components/Search'
+import MoiveDetail from '@/components/MoiveDetail'
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ export default new Router({
       meta: {
         keepAlive: true
       }
+    },
+    {
+      path: '/movie/detail/:movie_id',
+      name: 'MoiveDetail',
+      component: MoiveDetail
     }
   ]
 })

@@ -27,7 +27,7 @@ import qs from 'qs'
 import { Indicator, Toast } from 'mint-ui'
 import { API_ROOT } from './config'
 
-const fetch = axios.create({
+export const fetch = axios.create({
   baseURL: API_ROOT,
   responseType: 'json',
   timeout: 5000, // request timeout

@@ -165,7 +165,41 @@ export default {
     },
     // 分享
     shareMovie () {
-      console.log('shar')
+      let router_path = this.$route.path;
+      if (this.isCordova()) {
+        console.log('cordova')
+        this.initCordovaShare()
+      } else {
+        this.dialog = true
+        this.initWebShare()
+      }
+    },
+    initCordovaShare() {
+      let opt = {}
+      opt.url = location.href
+      opt.message = `《${this.movie.title}》在线观看_电视剧_美剧_免费电影在线看_2018最新电影`
+      window.plugins.socialsharing.shareWithOptions(opt, (onSuccess) => {
+        console.log(onSuccess)
+      }, (onError) => {
+        console.log(onError)
+      })
+    },
+    initWebShare() {
+      let opt = {}
+      opt.url = location.href
+      opt.title = `《${this.movie.title}》在线观看_电视剧_美剧_免费电影在线看_2018最新电影`
+      opt.pic = this.movie.cover
+      opt.digest = ''
+      opt.sites = ['weixin,', 'weibo', 'qzone', 'tqq', 'douban', 'tieba']
+
+      this.$nextTick(() => {
+        sosh('#soshid', opt)
+      })
+    },
+    isCordova() {
+      document.addEventListener("deviceready", () => {
+        return true;
+      }, false);
     },
     close () {
       this.dialog = false

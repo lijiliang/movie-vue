@@ -2,13 +2,22 @@
   <layout :has_share="has_share" title="综合">
     <div class="page_wrap">
       <div class="page_bd">
-        <div class="content">
-          <div class="list">
-            <div class="title">
-              <h4 class="type">电影</h4>
+        <div class="content" v-if="loading !== 'loading'">
+          <mu-refresh-control :refreshing="refreshing" :trigger="trigger" @refresh="refresh" />
+            <div class="list">
+              <div class="title">
+                <h4 class="type">电影</h4>
+              </div>
+              <media-card :media="movies"></media-card>
+              <div class="more" @click="jumpMovie">查看更多...</div>
             </div>
-            <media-card :media="movies"></media-card>
-          </div>
+            <div class="list">
+                <div class="title">
+                    <h4 class="type">电视剧</h4>
+                </div>
+                <MediaCard :media="tvs"></MediaCard>
+                <div class="more" @click="jumpTv">查看更多...</div>
+            </div>
         </div>
       </div>
     </div>
@@ -33,32 +42,38 @@ export default {
   created () {
     this.getIndex()
   },
+  mounted () {
+    this.trigger = this.$el
+  },
   methods: {
     async getIndex () {
       let params = {}
       params.page = this.page || 1
-      console.log(this.$store)
       const res = await this.$store.dispatch('getAllList', params)
-      const {ok, status, data} = res
-      if (ok && status === 200) {
-        if (params.page > 1) {
-          this.movies.push(...res.movies)
-          this.tvs.push(...res.tvs)
-        } else {
-          this.movies = data.movies.slice(0, data.movies.length - 1)
-          this.tvs = data.tvs.slice(0, data.tvs.length - 1)
-        }
+      const {data} = res
+      if (params.page > 1) {
+        this.movies.push(...data.movies)
+        this.tvs.push(...data.tvs)
       } else {
-        this.loading = 'error'
+        this.movies = data.movies.slice(0, data.movies.length - 1)
+        this.tvs = data.tvs.slice(0, data.tvs.length - 1)
       }
-      console.log(data)
-      this.movies = data.movies
+      // this.movies = data.movies
       // try {
       //   const { data } = await getIndex({page: 1})
       //   console.log(data)
       // } catch (err) {
       //   console.log(err)
       // }
+    },
+    refresh () {
+      this.getIndex()
+    },
+    jumpMovie () {
+      this.$router.push('/movie')
+    },
+    jumpTv () {
+      this.$router.push('/tv')
     }
   },
   components: {

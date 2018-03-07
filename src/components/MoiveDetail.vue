@@ -26,12 +26,23 @@
             </mu-raised-button>
           </div>
         </div>
+        <div class="loading_box">
+          <mu-circular-progress :size="45" v-if="loading === 'loading'" />
+        </div>
+      </div>
+      <div class="page_ft">
+        <mu-dialog :open="dialog" title="分享到" @close="close">
+          <div id="soshid"></div>
+          <mu-flat-button slot="actions" @click="close" primary label="关闭" />
+        </mu-dialog>
       </div>
     </div>
   </layout>
 </template>
 <script>
 import Layout from '@/components/Layout'
+import Store from 'storejs'
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
@@ -51,12 +62,11 @@ export default {
       params.film_id = this.$route.params.movie_id
       this.loading = 'loading'
       const { data } = await this.$store.dispatch('getFilmsDetail', params)
-      console.log(data)
       this.loading = 'loaded'
       this.current_src = data.src[0]
       this.movie = this.initData(data)
       this.$nextTick(() => {
-        // _self.saveHistory();
+        this.saveHistory()
         this.initDplayer()
       })
     },
@@ -113,13 +123,52 @@ export default {
         }]
       })
     },
+    // 浏览记录
+    saveHistory () {
+      let arr = []
+      arr = Store.get('view_list')
+      if (arr) {
+        arr = arr.filter(item => {
+          return item.id != this.movie.id
+        })
+        arr.unshift(this.movie)
+        // 仅仅保存最近30条浏览记录
+        if (arr.length > 30) {
+          arr = arr.slice(0, 30)
+        }
+      } else {
+        arr = []
+        arr.unshift(this.movie)
+      }
+      Store.set('view_list', arr)
+    },
+    // 收藏
+    saveMovie () {
+      let arr = []
+      arr = Store.get('favorite_list')
+      if (arr) {
+        // 返回与当前id不相等的数级，然后再将最新的放到最前面
+        arr = arr.filter(item => {
+          return item.id != this.movie.id
+        })
+        arr.unshift(this.movie)
+      } else {
+        arr = []
+        arr.unshift(this.movie)
+      }
+      Store.set('favorite_list', arr)
+      Toast({
+        message: '已收藏',
+        position: 'bottom',
+        duration: 3000
+      })
+    },
     // 分享
     shareMovie () {
       console.log('shar')
     },
-    // 收藏
-    saveMovie () {
-      console.log('收藏')
+    close () {
+      this.dialog = false
     }
   },
   components: {

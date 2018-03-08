@@ -12,11 +12,29 @@
 </template>
 
 <script>
+import Store from 'storejs'
+/* eslint-disable*/
+import def from '!raw-loader!muse-ui/dist/theme-default.css';
+/* eslint-disable*/
+import light from '!raw-loader!muse-ui/dist/theme-light.css';
+/* eslint-disable*/
+import dark from '!raw-loader!muse-ui/dist/theme-dark.css';
+/* eslint-disable*/
+import carbon from '!raw-loader!muse-ui/dist/theme-carbon.css';
+/* eslint-disable*/
+import teal from '!raw-loader!muse-ui/dist/theme-teal.css';
 export default {
   name: 'App',
   data () {
     return {
-      transitionName: ''
+      transitionName: '',
+      themes: {
+        def,
+        light,
+        dark,
+        carbon,
+        teal
+      }
     }
   },
   watch: {
@@ -33,6 +51,25 @@ export default {
       if (toDepth > fromDepth) {
         this.transitionName = 'slide-left'
       }
+    }
+  },
+  created () {
+    this.setTheme()
+  },
+  methods: {
+    setTheme () {
+      let local_theme = Store.get('theme') || '' // 获取本地主题
+      const styleEl = this.getThemeStyle()
+      styleEl.innerHTML = this.themes[local_theme] || ''
+    },
+    getThemeStyle() {
+      const themeId = 'muse-theme'
+      let styleEl = document.getElementById(themeId)
+      if (styleEl) return styleEl
+      styleEl = document.createElement('style')
+      styleEl.id = themeId
+      document.body.appendChild(styleEl)
+      return styleEl
     }
   }
 }

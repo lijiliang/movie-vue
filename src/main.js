@@ -6,8 +6,8 @@ import store from './vuex/store'
 import filters from './filters'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
-import 'muse-ui/dist/theme-default.css' // 使用 carbon 主题
-import 'mint-ui/lib/style.css'
+// import 'muse-ui/dist/theme-default.css' // 使用 carbon 主题
+// import 'mint-ui/lib/style.css'
 
 Fastclick.attach(document.body)
 

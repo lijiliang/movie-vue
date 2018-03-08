@@ -9,6 +9,7 @@ import MoiveDetail from '@/components/MoiveDetail'
 import History from '@/components/History'
 import Favorite from '@/components/Favorite'
 import About from '@/components/About'
+import Settings from '@/components/Settings'
 
 Vue.use(Router)
 
@@ -73,6 +74,11 @@ export default new Router({
       path: '/user/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/user/settings',
+      name: 'Settings',
+      component: Settings
     }
   ]
 })

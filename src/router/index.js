@@ -7,6 +7,7 @@ import User from '@/components/User'
 import Search from '@/components/Search'
 import MoiveDetail from '@/components/MoiveDetail'
 import History from '@/components/History'
+import Favorite from '@/components/Favorite'
 
 Vue.use(Router)
 
@@ -61,6 +62,11 @@ export default new Router({
       path: '/user/history',
       name: 'History',
       component: History
+    },
+    {
+      path: '/user/favorite',
+      name: 'Favorite',
+      component: Favorite
     }
   ]
 })

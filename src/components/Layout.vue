@@ -8,7 +8,7 @@
             <mu-icon-button icon="arrow_back" slot="left" v-if="!has_menu" @click="goBack" />
             <mu-icon-menu icon="more_vert" slot="right" v-if="has_share">
               <slot name="bar_menu">
-                <mu-menu-item title="分享"/>
+                <mu-menu-item title="分享" @click="share"/>
                 <mu-menu-item to="/user/favorite" title="我的收藏" />
               </slot>
             </mu-icon-menu>
@@ -129,6 +129,44 @@ export default {
     },
     search () {
       this.$router.push('/all/search')
+    },
+    // 分享
+    share () {
+      // let router_path = this.$route.path
+      if (this.isCordova()) {
+        console.log('cordova')
+        this.initCordovaShare()
+      } else {
+        this.dialog = true
+        this.initWebShare()
+      }
+    },
+    initCordovaShare () {
+      let opt = {}
+      opt.url = location.href
+      opt.message = `在线电影_电视剧_美剧_免费电影在线看_2018最新电影`
+      window.plugins.socialsharing.shareWithOptions(opt, (onSuccess) => {
+        console.log(onSuccess)
+      }, (onError) => {
+        console.log(onError)
+      })
+    },
+    initWebShare () {
+      let opt = {}
+      opt.url = location.href
+      opt.title = '在线电影_电视剧_美剧_免费电影在线看_2017最新电影'
+      opt.digest = ''
+      opt.sites = ['weixin,', 'weibo', 'qzone', 'tqq', 'douban', 'tieba']
+
+      this.$nextTick(() => {
+        /* eslint-disable*/
+        sosh('#soshid', opt)
+      })
+    },
+    isCordova () {
+      document.addEventListener('deviceready', () => {
+        return true
+      }, false)
     },
     closeDialog () {
       this.dialog = false

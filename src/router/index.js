@@ -8,6 +8,7 @@ import Search from '@/components/Search'
 import MoiveDetail from '@/components/MoiveDetail'
 import History from '@/components/History'
 import Favorite from '@/components/Favorite'
+import About from '@/components/About'
 
 Vue.use(Router)
 
@@ -67,6 +68,11 @@ export default new Router({
       path: '/user/favorite',
       name: 'Favorite',
       component: Favorite
+    },
+    {
+      path: '/user/about',
+      name: 'About',
+      component: About
     }
   ]
 })

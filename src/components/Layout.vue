@@ -47,6 +47,7 @@
   </div>
 </template>
 <script>
+import Store from 'storejs'
 import bg from '../assets/images/bg.png'
 export default {
   data () {
@@ -102,6 +103,8 @@ export default {
   },
   activated () {
     this.setActiveNav()
+    this.getModSwitch()
+    this.setStatusBar()
   },
   methods: {
     openMenu () {
@@ -126,6 +129,37 @@ export default {
     setActiveNav () {
       let path = this.$route.path
       this.active_nav = path
+    },
+    /* eslint-disable*/
+    setStatusBar () {
+      let theme = Store.get('theme') || ''
+      let themeColor = '#7E57C2'
+      if (theme === 'def') {
+        themeColor = '#7E57C2'
+      }
+      if (theme === 'light') {
+        themeColor = '#2196f3'
+      }
+      if (theme === 'dark') {
+        themeColor === '#424242'
+      }
+      if (theme === 'carbon') {
+        themeColor = '#474a4f'
+      }
+      if (theme === 'teal') {
+        themeColor = '#009688'
+      }
+      /* eslint-disable*/
+      document.addEventListener('deviceready', () => {
+        console.log('设备已就绪')
+        /* eslint-disable*/
+        StatusBar.backgroundColorByHexString(themeColor)
+      }, false)
+    },
+    getModSwitch () {
+      let a = Store.get('mod_switch') || false
+      console.log(a)
+      this.layout_type = a
     },
     search () {
       this.$router.push('/all/search')

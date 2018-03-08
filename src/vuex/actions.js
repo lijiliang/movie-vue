@@ -1,4 +1,4 @@
-import { getIndex, getFilmsDetail, getFilmsList, getTvList } from '@/api'
+import { getIndex, getFilmsDetail, getFilmsList, getTvList, getSearch } from '@/api'
 
 export default {
   // 获取首页数据
@@ -16,5 +16,9 @@ export default {
   // 电视列表
   getTvList ({ commit, state }, params) {
     return getTvList({page: params.page})
+  },
+  // 搜索
+  getSearch ({ commit, state }, params) {
+    return getSearch({page: params.page, q: params.q})
   }
 }

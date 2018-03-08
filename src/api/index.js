@@ -16,6 +16,10 @@ export function getFilmsList (params) {
 export function getTvList (params) {
   return getFetch('tvs', params)
 }
+// 搜索
+export function getSearch (params) {
+  return getFetch('search', params)
+}
 
 export function createArticle (data) {
   return postFetch('/article/create', data)

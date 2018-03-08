@@ -6,6 +6,7 @@ import Tv from '@/components/Tv'
 import User from '@/components/User'
 import Search from '@/components/Search'
 import MoiveDetail from '@/components/MoiveDetail'
+import History from '@/components/History'
 
 Vue.use(Router)
 
@@ -36,14 +37,6 @@ export default new Router({
       }
     },
     {
-      path: '/user',
-      name: 'User',
-      component: User,
-      meta: {
-        keepAlive: true
-      }
-    },
-    {
       path: '/all/search',
       name: 'Search',
       component: Search,
@@ -55,6 +48,19 @@ export default new Router({
       path: '/movie/detail/:movie_id',
       name: 'MoiveDetail',
       component: MoiveDetail
+    },
+    {
+      path: '/user',
+      name: 'User',
+      component: User,
+      meta: {
+        keepAlive: true
+      }
+    },
+    {
+      path: '/user/history',
+      name: 'History',
+      component: History
     }
   ]
 })

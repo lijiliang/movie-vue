@@ -158,7 +158,6 @@ export default {
     },
     getModSwitch () {
       let a = Store.get('mod_switch') || false
-      console.log(a)
       this.layout_type = a
     },
     search () {

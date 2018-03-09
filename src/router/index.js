@@ -10,10 +10,11 @@ import History from '@/components/History'
 import Favorite from '@/components/Favorite'
 import About from '@/components/About'
 import Settings from '@/components/Settings'
+import Login from '@/components/Login'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -79,6 +80,13 @@ export default new Router({
       path: '/user/settings',
       name: 'Settings',
       component: Settings
+    },
+    {
+      path: '/user/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
+
+export default router

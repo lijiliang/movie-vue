@@ -1,30 +1,73 @@
-# movie-vue
+## 基于vue2.0构建的在线电影网
 
-> A Vue.js project
+api来源于网上，仅供开发参考之用，禁用于商业，否则后果自负
 
-## Build Setup
+## 屏幕截图，该项目使用了响应式布局
 
-``` bash
-# install dependencies
+### 动画演示
+![image]('./img/movie.gif')
+
+### 移动端效果
+![image]('./img/1.png')
+![image]('./img/2.png')
+
+### pc端效果
+![image]('./img/pc.png')
+
+### 主要特色：
+
+1. 组件化开发
+2. 下拉刷新
+3. 无限加载
+4. 浏览历史
+5. 响应式布局
+6. 缓存数据
+8. 收藏
+9. 视频播放
+10. md风格模式
+11. 主题更换
+
+### 运行 
+
+```
 npm install
 
-# serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 目录结构
+```
+# web目录结构
+
+├─build                 # build配置目录
+├─config                # 相关配置
+├─img                   # 屏幕截图
+├─src                   # 项目源码主目录	
+│  ├─assets             # 资源
+│  │  └─less            # less通用文件目录
+│  ├─components         # 页面及其组件
+│  ├─router             # 路由
+│  └─vuex               # vuex，其中包含了全局api，状态管理器
+│      └─modules        # moduless
+│  └─api                # 统一api请求
+│      └─index          # index
+│  └─base               # 公用的一些函数及配置
+│      └─config         # 配置文件
+│      └─fetch          # 封装好的统一请求
+│  └─filters            # 过滤器
+│      └─index          # index
+├─static                # 外部资源引入
+│  ├─css                # 外部样式
+│  │  ├─font            # 字体图标
+│  │  └─woff            # 字体图标
+│  └─js                 # 外部js	
+└─test                  # 测试用，不用管这个
+    ├─e2e
+    │  ├─custom-assertions
+    │  └─specs
+    └─unit
+        └─specs
+```

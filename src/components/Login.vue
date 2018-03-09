@@ -26,9 +26,20 @@ export default {
     loginEvent () {
       // 利用vuex设置登录状态
       this.$store.commit('SEL_IS_LOGIN', true)
-      this.$router.push('/')
+
+      // 登录成功后跳转
+      let redirect = this.$route.query.redirect
+      if (redirect) {
+        this.$router.push({
+          path: '/' + redirect
+        })
+      } else {
+        this.$router.push('/')
+      }
     },
-    loginOut () {}
+    loginOut () {
+      this.$store.commit('SEL_IS_LOGIN', false)
+    }
   },
   computed: {
     getIsLogin () {

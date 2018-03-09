@@ -5,7 +5,9 @@ api来源于网上，仅供开发参考之用，禁用于商业，否则后果�
 ## 屏幕截图，该项目使用了响应式布局
 
 ### 动画演示
-![image](./img/movie.gif)
+<figure class="half">
+<img src="./img/movie.png" width="400">
+</figure>
 
 ### 移动端效果
 <figure class="half">

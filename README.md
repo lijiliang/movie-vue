@@ -8,8 +8,12 @@ api来源于网上，仅供开发参考之用，禁用于商业，否则后果�
 ![image](./img/movie.gif)
 
 ### 移动端效果
-![image](./img/1.png)
-![image](./img/2.png)
+<figure class="half">
+<img src="./img/1.png" width="400">
+</figure>
+<figure class="half">
+<img src="./img/2.png" width="400">
+</figure>
 
 ### pc端效果
 ![image](./img/pc.png)

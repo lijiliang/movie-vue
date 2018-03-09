@@ -6,7 +6,7 @@ api来源于网上，仅供开发参考之用，禁用于商业，否则后果�
 
 ### 动画演示
 <figure class="half">
-<img src="./img/movie.png" width="400">
+<img src="./img/movie.gif" width="400">
 </figure>
 
 ### 移动端效果

@@ -1,4 +1,5 @@
 ## 基于vue2.0构建的在线电影网
+技术栈： webpack + vue + vuex + veu-router + muse-ui + es6
 
 api来源于网上，仅供开发参考之用，禁用于商业，否则后果自负
 
@@ -77,3 +78,4 @@ npm run build
     └─unit
         └─specs
 ```
+

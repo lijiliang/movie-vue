@@ -18,11 +18,11 @@
           <mu-icon slot="left" value="timeline"/>
           <mu-icon slot="right" value="keyboard_arrow_right"/>
         </mu-list-item>
-        <mu-list-item title="登录" to="user/login">
+        <mu-list-item title="登录" to="user/login" v-if="false">
           <mu-icon slot="left" value="launch"/>
           <mu-icon slot="right" value="keyboard_arrow_right"/>
         </mu-list-item>
-        <mu-list-item title="测试" to="user/test">
+        <mu-list-item title="测试" to="user/test" v-if="false">
           <mu-icon slot="left" value="send"/>
           <mu-icon slot="right" value="keyboard_arrow_right"/>
         </mu-list-item>
